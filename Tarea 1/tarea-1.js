@@ -18,6 +18,7 @@ const $formulariosGrupoFamiliar = document.querySelector(
   "#formularios-grupo-familiar"
 );
 
+
 const $labelcalcularMayorEdad = document.createElement("label");
 $labelcalcularMayorEdad.className = "label-clase";
 $labelcalcularMayorEdad.innerText = "Mayor de edad";
@@ -30,6 +31,16 @@ const $labelcalcularPromedioEdad = document.createElement("label");
 $labelcalcularPromedioEdad.className = "label-clase";
 $labelcalcularPromedioEdad.innerText = "Promedio de edad";
 
+/*
+const $labelLimpiarFormulario = document.createElement("label");
+$limpiarFormulario.className = "label-clase";
+$limpiarFormulario.innerText = "Limpiar";
+const $limpiarFormulario = document.createElement("button");
+$limpiarFormulario.appendChild($labelLimpiarFormulario);
+$limpiarFormulario.setAttribute("type", "Limpiar");
+$formulariosGrupoFamiliar.appendChild($limpiarFormulario);
+*/
+
 const $calcularMayorEdad = document.createElement("button");
 $calcularMayorEdad.appendChild($labelcalcularMayorEdad);
 $calcularMayorEdad.setAttribute("type", SubmitEvent);
@@ -38,21 +49,23 @@ $formulariosGrupoFamiliar.appendChild($calcularMayorEdad);
 
 const $calcularMenorEdad = document.createElement("button");
 $calcularMenorEdad.appendChild($labelcalcularMenorEdad);
+$calcularMenorEdad.setAttribute("id", "menor-edad");
 $calcularMenorEdad.setAttribute("type", SubmitEvent);
 $formulariosGrupoFamiliar.appendChild($calcularMenorEdad);
 
 const $calcularPromedioEdad = document.createElement("button");
 $calcularPromedioEdad.appendChild($labelcalcularPromedioEdad);
+$calcularPromedioEdad.setAttribute("id", "promedio-edad");
 $calcularPromedioEdad.setAttribute("type", SubmitEvent);
 $formulariosGrupoFamiliar.appendChild($calcularPromedioEdad);
-
-const $limpiarFormulario = document.createElement("button");
-$limpiarFormulario.setAttribute("type", "Limpiar");
 
 function crearInput($formulariosGrupoFamiliar, textoLabel) {
   const $nuevoInput = document.createElement("input");
   const $nuevoLabel = document.createElement("label");
   const $orderList = document.createElement("ol");
+  $nuevoInput.setAttribute("type", "number");
+  $nuevoInput.setAttribute("id", "valores");
+  $nuevoInput.setAttribute("placeholder", "Edad");
   $nuevoInput.className = "input-clase";
   $nuevoInput.setAttribute("type", "number");
   $nuevoInput.setAttribute("placeholder", "Edad");
@@ -73,6 +86,20 @@ function contarGrupoFamiliar() {
 }
 
 document.querySelector("#mayor-edad").onclick = function () {
+  let arrayEdad = [];
+  let valorMaximo = 0;
+  let edadInputs = document.querySelectorAll("#valores");
+  for (let i = 0; i < edadInputs.length; i++) {
+    arrayEdad.push(edadInputs[i].value);
+  }
+  for (i = 0; i < arrayEdad.length; i++) {
+    if (arrayEdad[i] > valorMaximo) {
+      valorMaximo = arrayEdad[i];
+    }
+    const $mayorEdad = document.querySelector("em", "#mayor-edad");
+    $mayorEdad.innerText = `El integrante con mayor edad tiene ${valorMaximo} años.`;
+  }
+
   document.getElementsByName("Edad");
   const promedioEdad = document.getElementsByName("Edad");
   console.log(promedioEdad);

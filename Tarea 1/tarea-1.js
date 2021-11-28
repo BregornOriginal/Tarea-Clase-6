@@ -27,9 +27,20 @@ const $labelcalcularMenorEdad = document.createElement("label");
 $labelcalcularMenorEdad.className = "label-clase";
 $labelcalcularMenorEdad.innerText = "Menor de edad";
 
+
+const $labelcalcularMayorEdad = document.createElement("label");
+$labelcalcularMayorEdad.className = "label-clase";
+$labelcalcularMayorEdad.innerText = "Mayor de edad";
+
+const $labelcalcularMenorEdad = document.createElement("label");
+$labelcalcularMenorEdad.className = "label-clase";
+$labelcalcularMenorEdad.innerText = "Menor de edad";
+
+
 const $labelcalcularPromedioEdad = document.createElement("label");
 $labelcalcularPromedioEdad.className = "label-clase";
 $labelcalcularPromedioEdad.innerText = "Promedio de edad";
+
 
 /*
 const $labelLimpiarFormulario = document.createElement("label");
@@ -41,6 +52,8 @@ $limpiarFormulario.setAttribute("type", "Limpiar");
 $formulariosGrupoFamiliar.appendChild($limpiarFormulario);
 */
 
+
+
 const $calcularMayorEdad = document.createElement("button");
 $calcularMayorEdad.appendChild($labelcalcularMayorEdad);
 $calcularMayorEdad.setAttribute("type", SubmitEvent);
@@ -49,23 +62,37 @@ $formulariosGrupoFamiliar.appendChild($calcularMayorEdad);
 
 const $calcularMenorEdad = document.createElement("button");
 $calcularMenorEdad.appendChild($labelcalcularMenorEdad);
+
 $calcularMenorEdad.setAttribute("id", "menor-edad");
+
+
 $calcularMenorEdad.setAttribute("type", SubmitEvent);
 $formulariosGrupoFamiliar.appendChild($calcularMenorEdad);
 
 const $calcularPromedioEdad = document.createElement("button");
 $calcularPromedioEdad.appendChild($labelcalcularPromedioEdad);
+
 $calcularPromedioEdad.setAttribute("id", "promedio-edad");
 $calcularPromedioEdad.setAttribute("type", SubmitEvent);
 $formulariosGrupoFamiliar.appendChild($calcularPromedioEdad);
+
+
+$calcularPromedioEdad.setAttribute("type", SubmitEvent);
+$formulariosGrupoFamiliar.appendChild($calcularPromedioEdad);
+
+const $limpiarFormulario = document.createElement("button");
+$limpiarFormulario.setAttribute("type", "Limpiar");
 
 function crearInput($formulariosGrupoFamiliar, textoLabel) {
   const $nuevoInput = document.createElement("input");
   const $nuevoLabel = document.createElement("label");
   const $orderList = document.createElement("ol");
+
   $nuevoInput.setAttribute("type", "number");
   $nuevoInput.setAttribute("id", "valores");
   $nuevoInput.setAttribute("placeholder", "Edad");
+
+
   $nuevoInput.className = "input-clase";
   $nuevoInput.setAttribute("type", "number");
   $nuevoInput.setAttribute("placeholder", "Edad");
@@ -86,6 +113,7 @@ function contarGrupoFamiliar() {
 }
 
 document.querySelector("#mayor-edad").onclick = function () {
+
   let arrayEdad = [];
   let valorMaximo = 0;
   let edadInputs = document.querySelectorAll("#valores");

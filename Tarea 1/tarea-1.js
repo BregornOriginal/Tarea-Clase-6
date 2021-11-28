@@ -98,5 +98,5 @@ document.querySelector("#mayor-edad").onclick = function () {
   }
   return false;
 };
-
+fd
 contarGrupoFamiliar();

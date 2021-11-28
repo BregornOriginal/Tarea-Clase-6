@@ -41,20 +41,6 @@ $limpiarFormulario.setAttribute("type", "Limpiar");
 $formulariosGrupoFamiliar.appendChild($limpiarFormulario);
 */
 
-
-const $labelcalcularMayorEdad = document.createElement("label");
-$labelcalcularMayorEdad.className = "label-clase";
-$labelcalcularMayorEdad.innerText = "Mayor de edad";
-
-const $labelcalcularMenorEdad = document.createElement("label");
-$labelcalcularMenorEdad.className = "label-clase";
-$labelcalcularMenorEdad.innerText = "Menor de edad";
-
-const $labelcalcularPromedioEdad = document.createElement("label");
-$labelcalcularPromedioEdad.className = "label-clase";
-$labelcalcularPromedioEdad.innerText = "Promedio de edad";
-
-
 const $calcularMayorEdad = document.createElement("button");
 $calcularMayorEdad.appendChild($labelcalcularMayorEdad);
 $calcularMayorEdad.setAttribute("type", SubmitEvent);
@@ -64,22 +50,14 @@ $formulariosGrupoFamiliar.appendChild($calcularMayorEdad);
 const $calcularMenorEdad = document.createElement("button");
 $calcularMenorEdad.appendChild($labelcalcularMenorEdad);
 $calcularMenorEdad.setAttribute("id", "menor-edad");
-
 $calcularMenorEdad.setAttribute("type", SubmitEvent);
 $formulariosGrupoFamiliar.appendChild($calcularMenorEdad);
 
 const $calcularPromedioEdad = document.createElement("button");
 $calcularPromedioEdad.appendChild($labelcalcularPromedioEdad);
-
 $calcularPromedioEdad.setAttribute("id", "promedio-edad");
 $calcularPromedioEdad.setAttribute("type", SubmitEvent);
 $formulariosGrupoFamiliar.appendChild($calcularPromedioEdad);
-
-$calcularPromedioEdad.setAttribute("type", SubmitEvent);
-$formulariosGrupoFamiliar.appendChild($calcularPromedioEdad);
-
-const $limpiarFormulario = document.createElement("button");
-$limpiarFormulario.setAttribute("type", "Limpiar");
 
 function crearInput($formulariosGrupoFamiliar, textoLabel) {
   const $nuevoInput = document.createElement("input");
@@ -127,5 +105,5 @@ document.querySelector("#mayor-edad").onclick = function () {
   console.log(promedioEdad);
   return false;
 };
-fd
+
 contarGrupoFamiliar();

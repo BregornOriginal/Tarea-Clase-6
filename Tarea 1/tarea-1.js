@@ -96,7 +96,7 @@ document.querySelector("#mayor-edad").onclick = function () {
     if (arrayEdad[i] > valorMaximo) {
       valorMaximo = arrayEdad[i];
     }
-    const $mayorEdad = document.querySelector("em", "#mayor-edad");
+    const $mayorEdad = document.querySelector("em");
     $mayorEdad.innerText = `El integrante con mayor edad tiene ${valorMaximo} años.`;
   }
   return false;
@@ -113,7 +113,7 @@ document.querySelector("#menor-edad").onclick = function () {
     if (arrayEdad[i] < valorMinimo) {
       valorMinimo = arrayEdad[i];
     }
-    const $menorEdad = document.querySelector("em", "#menor-edad");
+    const $menorEdad = document.querySelector("em");
   $menorEdad.innerText = `El integrante con menor edad tiene ${valorMinimo} años.`;
   }
   

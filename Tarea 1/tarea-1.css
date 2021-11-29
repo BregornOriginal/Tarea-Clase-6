@@ -3,3 +3,16 @@
     color: royalblue;
     margin: 1;
 }
+.input-clase{
+    font-size: 15px;
+    margin: 2px;
+}
+.label-clase{
+    margin: 3;
+    color:red;
+
+}
+#integrantes{
+    color:orangered;
+    margin: 75px
+}

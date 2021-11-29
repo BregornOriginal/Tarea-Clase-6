@@ -14,6 +14,10 @@ borrando los inputs ya creados (investigar cómo en MDN).
 // de menor edad y el promedio de edad del grupo familiar.
 // también puedo crear un botón que al utilizarlo me limpie los inputs ya creados.
 
+
+// Se entregó la tarea con los 4 botones, en este código se encuentra activo solo el botón 
+// mayor edad que cumple con todos los cálculos solicitados.
+
 const $formulariosGrupoFamiliar = document.querySelector(
   "#formularios-grupo-familiar"
 );
@@ -22,8 +26,9 @@ contarGrupoFamiliar();
 
 const $labelcalcularMayorEdad = document.createElement("label");
 $labelcalcularMayorEdad.className = "label-clase";
-$labelcalcularMayorEdad.innerText = "Mayor de edad";
+$labelcalcularMayorEdad.innerText = "Calcular";
 
+/*
 const $labelcalcularMenorEdad = document.createElement("label");
 $labelcalcularMenorEdad.className = "label-clase";
 $labelcalcularMenorEdad.innerText = "Menor de edad";
@@ -32,11 +37,15 @@ const $labelcalcularPromedioEdad = document.createElement("label");
 $labelcalcularPromedioEdad.className = "label-clase";
 $labelcalcularPromedioEdad.innerText = "Promedio de edad";
 
+*/
+
 const $calcularMayorEdad = document.createElement("button");
 $calcularMayorEdad.appendChild($labelcalcularMayorEdad);
 $calcularMayorEdad.setAttribute("id", "mayor-edad");
 $calcularMayorEdad.setAttribute("type", SubmitEvent);
 $formulariosGrupoFamiliar.appendChild($calcularMayorEdad);
+
+/*
 
 const $calcularMenorEdad = document.createElement("button");
 $calcularMenorEdad.appendChild($labelcalcularMenorEdad);
@@ -49,6 +58,8 @@ $calcularPromedioEdad.appendChild($labelcalcularPromedioEdad);
 $calcularPromedioEdad.setAttribute("id", "promedio-edad");
 $calcularPromedioEdad.setAttribute("type", SubmitEvent);
 $formulariosGrupoFamiliar.appendChild($calcularPromedioEdad);
+
+*/
 
 const $limpiarFormulario = document.createElement("button");
 $limpiarFormulario.setAttribute("type", "reset");
@@ -93,12 +104,33 @@ document.querySelector("#mayor-edad").onclick = function () {
     if (arrayEdad[i] > valorMaximo) {
       valorMaximo = arrayEdad[i];
     }
-    const $mayorEdad = document.querySelector("em");
+    const $mayorEdad = document.querySelector("#mayor");
     $mayorEdad.innerText = `El integrante con mayor edad tiene ${valorMaximo} años.`;
+  }      
+  
+   // Lo que sigue a continuación es el código para que calcule mínimo y promedio de edad.
+  
+   let valorMinimo = arrayEdad[0];
+  for (i = 0; i < arrayEdad.length; i++) {
+    if (arrayEdad[i] < valorMinimo) {
+      valorMinimo = arrayEdad[i];
+    }
+    const $menorEdad = document.querySelector("#menor");
+    $menorEdad.innerText = `El integrante con menor edad tiene ${valorMinimo} años.`;
   }
+  let promedioEdad = 0;
+  let resultado = 0;
+  for (i = 0; i < arrayEdad.length; i++) {
+    resultado += +arrayEdad[i];
+    promedioEdad = resultado / arrayEdad.length;
+  }
+  const $mayorEdad = document.querySelector("#promedio");
+  $mayorEdad.innerText = `El promedio de edad es de ${promedioEdad} años.`;
+
   return false;
 };
 
+/*
 document.querySelector("#menor-edad").onclick = function () {
   let arrayEdad = [];
   let edadInputs = document.querySelectorAll("#valores");
@@ -110,7 +142,7 @@ document.querySelector("#menor-edad").onclick = function () {
     if (arrayEdad[i] < valorMinimo) {
       valorMinimo = arrayEdad[i];
     }
-    const $menorEdad = document.querySelector("em");
+    const $menorEdad = document.querySelector("#menor");
     $menorEdad.innerText = `El integrante con menor edad tiene ${valorMinimo} años.`;
   }
 
@@ -130,10 +162,10 @@ document.querySelector("#promedio-edad").onclick = function () {
     promedioEdad = resultado / arrayEdad.length
     console.log(resultado)
   }
-  const $mayorEdad = document.querySelector("em");
+  const $mayorEdad = document.querySelector("#promedio");
   $mayorEdad.innerText = `El promedio de edad es de ${promedioEdad} años.`;
 
   return false;
 };
 
-
+*/

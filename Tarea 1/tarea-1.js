@@ -18,6 +18,8 @@ const $formulariosGrupoFamiliar = document.querySelector(
   "#formularios-grupo-familiar"
 );
 
+contarGrupoFamiliar();
+
 const $labelcalcularMayorEdad = document.createElement("label");
 $labelcalcularMayorEdad.className = "label-clase";
 $labelcalcularMayorEdad.innerText = "Mayor de edad";
@@ -30,14 +32,10 @@ const $labelcalcularPromedioEdad = document.createElement("label");
 $labelcalcularPromedioEdad.className = "label-clase";
 $labelcalcularPromedioEdad.innerText = "Promedio de edad";
 
-const $labelLimpiarFormulario = document.createElement("label");
-$labelLimpiarFormulario.className = "label-clase";
-$labelLimpiarFormulario.innerText = "Limpiar";
-
 const $calcularMayorEdad = document.createElement("button");
 $calcularMayorEdad.appendChild($labelcalcularMayorEdad);
-$calcularMayorEdad.setAttribute("type", SubmitEvent);
 $calcularMayorEdad.setAttribute("id", "mayor-edad");
+$calcularMayorEdad.setAttribute("type", SubmitEvent);
 $formulariosGrupoFamiliar.appendChild($calcularMayorEdad);
 
 const $calcularMenorEdad = document.createElement("button");
@@ -53,8 +51,9 @@ $calcularPromedioEdad.setAttribute("type", SubmitEvent);
 $formulariosGrupoFamiliar.appendChild($calcularPromedioEdad);
 
 const $limpiarFormulario = document.createElement("button");
-$limpiarFormulario.appendChild($labelLimpiarFormulario);
 $limpiarFormulario.setAttribute("type", "reset");
+$limpiarFormulario.className = "label-clase";
+$limpiarFormulario.innerText = "Limpiar";
 $formulariosGrupoFamiliar.appendChild($limpiarFormulario);
 
 function crearInput($formulariosGrupoFamiliar, textoLabel) {
@@ -68,6 +67,7 @@ function crearInput($formulariosGrupoFamiliar, textoLabel) {
   $nuevoInput.setAttribute("placeholder", "Edad");
   $nuevoInput.className = "input-clase";
   $nuevoLabel.innerText = textoLabel;
+  $nuevoLabel.setAttribute("id", "integrantes");
   $nuevoLabel.appendChild($nuevoInput);
   $nuevoLabel.appendChild($orderList);
   $formulariosGrupoFamiliar.appendChild($nuevoLabel);
@@ -136,4 +136,4 @@ document.querySelector("#promedio-edad").onclick = function () {
   return false;
 };
 
-contarGrupoFamiliar();
+

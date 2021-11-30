@@ -86,14 +86,15 @@ function crearInput($formulariosGrupoFamiliar, textoLabel) {
 
 function contarGrupoFamiliar() {
   let cantidadDePersonas = Number(
-    prompt("De cuantas personas está compuesta su grupo familiar?"));
+    prompt("De cuantas personas está compuesta su grupo familiar?")
+  );
   if (cantidadDePersonas > 0) {
-    for (let i = 1; i <= cantidadDePersonas; i++) {
-      crearInput($formulariosGrupoFamiliar, `Integrante ${i}`);
-    }
-  } else{
+  } else {
     alert("Por favor ingrese un número > 0");
     return contarGrupoFamiliar();
+  }
+  for (let i = 1; i <= cantidadDePersonas; i++) {
+    crearInput($formulariosGrupoFamiliar, `Integrante ${i}`);
   }
 }
 document.querySelector("#mayor-edad").onclick = function () {

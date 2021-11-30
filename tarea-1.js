@@ -87,12 +87,12 @@ function crearInput($formulariosGrupoFamiliar, textoLabel) {
 function contarGrupoFamiliar() {
   let cantidadDePersonas = Number(
     prompt("De cuantas personas está compuesta su grupo familiar?"));
-  if (cantidadDePersonas >= 0) {
+  if (cantidadDePersonas > 0) {
     for (let i = 1; i <= cantidadDePersonas; i++) {
       crearInput($formulariosGrupoFamiliar, `Integrante ${i}`);
     }
   } else{
-    alert("Por favor ingrese un número >= 0");
+    alert("Por favor ingrese un número > 0");
     return contarGrupoFamiliar();
   }
 }

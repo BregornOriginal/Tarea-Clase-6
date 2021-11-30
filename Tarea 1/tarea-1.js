@@ -14,8 +14,7 @@ borrando los inputs ya creados (investigar cómo en MDN).
 // de menor edad y el promedio de edad del grupo familiar.
 // también puedo crear un botón que al utilizarlo me limpie los inputs ya creados.
 
-
-// Se entregó la tarea con los 4 botones, en este código se encuentra activo solo el botón 
+// Se entregó la tarea con los 4 botones, en este código se encuentra activo solo el botón
 // mayor edad que cumple con todos los cálculos solicitados.
 
 const $formulariosGrupoFamiliar = document.querySelector(
@@ -61,11 +60,11 @@ $formulariosGrupoFamiliar.appendChild($calcularPromedioEdad);
 
 */
 
-const $limpiarFormulario = document.createElement("button");
-$limpiarFormulario.setAttribute("type", "reset");
-$limpiarFormulario.className = "label-clase";
-$limpiarFormulario.innerText = "Limpiar";
-$formulariosGrupoFamiliar.appendChild($limpiarFormulario);
+const $recargarFormulario = document.createElement("button");
+$recargarFormulario.setAttribute("id", "reload");
+$recargarFormulario.className = "label-clase";
+$recargarFormulario.innerText = "Limpiar";
+$formulariosGrupoFamiliar.appendChild($recargarFormulario);
 
 function crearInput($formulariosGrupoFamiliar, textoLabel) {
   const $nuevoForm = document.createElement("form");
@@ -79,6 +78,7 @@ function crearInput($formulariosGrupoFamiliar, textoLabel) {
   $nuevoInput.className = "input-clase";
   $nuevoLabel.innerText = textoLabel;
   $nuevoLabel.setAttribute("id", "integrantes");
+  $nuevoLabel.setAttribute("required", "_");
   $nuevoLabel.appendChild($nuevoInput);
   $nuevoLabel.appendChild($orderList);
   $formulariosGrupoFamiliar.appendChild($nuevoLabel);
@@ -86,13 +86,16 @@ function crearInput($formulariosGrupoFamiliar, textoLabel) {
 
 function contarGrupoFamiliar() {
   let cantidadDePersonas = Number(
-    prompt("De cuantas personas está compuesta tu grupo familiar?")
-  );
-  for (let i = 0; i < cantidadDePersonas; i++) {
-    crearInput($formulariosGrupoFamiliar, `Integrante ${i}`);
+    prompt("De cuantas personas está compuesta su grupo familiar?"));
+  if (cantidadDePersonas >= 0) {
+    for (let i = 1; i <= cantidadDePersonas; i++) {
+      crearInput($formulariosGrupoFamiliar, `Integrante ${i}`);
+    }
+  } else{
+    alert("Por favor ingrese un número >= 0");
+    return contarGrupoFamiliar();
   }
 }
-
 document.querySelector("#mayor-edad").onclick = function () {
   let arrayEdad = [];
   let edadInputs = document.querySelectorAll("#valores");
@@ -106,11 +109,11 @@ document.querySelector("#mayor-edad").onclick = function () {
     }
     const $mayorEdad = document.querySelector("#mayor");
     $mayorEdad.innerText = `El integrante con mayor edad tiene ${valorMaximo} años.`;
-  }      
-  
-   // Lo que sigue a continuación es el código para que calcule mínimo y promedio de edad.
-  
-   let valorMinimo = arrayEdad[0];
+  }
+
+  // Lo que sigue a continuación es el código para que calcule mínimo y promedio de edad.
+
+  let valorMinimo = arrayEdad[0];
   for (i = 0; i < arrayEdad.length; i++) {
     if (arrayEdad[i] < valorMinimo) {
       valorMinimo = arrayEdad[i];
@@ -128,6 +131,10 @@ document.querySelector("#mayor-edad").onclick = function () {
   $mayorEdad.innerText = `El promedio de edad es de ${promedioEdad} años.`;
 
   return false;
+};
+
+document.querySelector("#reload").onclick = function () {
+  location.reload();
 };
 
 /*

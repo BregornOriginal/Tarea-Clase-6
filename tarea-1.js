@@ -61,57 +61,66 @@ function crearInput($formulariosGrupoFamiliar, textoLabel) {
   $formulariosGrupoFamiliar.appendChild($nuevoLabel);
 }
 
-$botonEnviar.onclick = function() {
+$botonEnviar.onclick = function(event) {
+  
   const $boxIntegrantes = document.querySelector("#cantidad-integrantes");
   cantidadDePersonas = Number($boxIntegrantes.value);
   if (cantidadDePersonas > 0) {
+    for (let i = 1; i <= cantidadDePersonas; i++) {
+      crearInput($formulariosGrupoFamiliar, `Integrante ${i}`);
+    }
   } else {
-    alert("Por favor ingrese un número mayor a 0");
-    return;
+    return alert("Por favor ingrese un número mayor a 0");
   }
-  for (let i = 1; i <= cantidadDePersonas; i++) {
-    crearInput($formulariosGrupoFamiliar, `Integrante ${i}`);
-  }
-  return false;
+  event.preventDefault()
 };
 
-
-document.querySelector("#mayor-edad").onclick = function () {
-  let arrayEdad = [];
-  let edadInputs = document.querySelectorAll("#valores");
-  for (let i = 0; i < edadInputs.length; i++) {
-    arrayEdad.push(Number(edadInputs[i].value));
-  }
+function calcularMayorEdad(arrayEdad) {
   let valorMaximo = arrayEdad[0];
   for (i = 0; i < arrayEdad.length; i++) {
     if (arrayEdad[i] > valorMaximo) {
       valorMaximo = arrayEdad[i];
     }
-    const $mayorEdad = document.querySelector("#mayor");
-
-    $mayorEdad.innerText = `El integrante con mayor edad tiene ${valorMaximo} años.`;
   }
+  return valorMaximo;
+}
 
-  // Lo que sigue a continuación es el código para que calcule mínimo y promedio de edad.
-
+function calcularMenorEdad(arrayEdad){
   let valorMinimo = arrayEdad[0];
   for (i = 0; i < arrayEdad.length; i++) {
     if (arrayEdad[i] < valorMinimo) {
       valorMinimo = arrayEdad[i];
     }
-    const $menorEdad = document.querySelector("#menor");
-    $menorEdad.innerText = `El integrante con menor edad tiene ${valorMinimo} años.`;
   }
+  return valorMinimo;
+}
+
+function calcularPromedioEdad(arrayEdad) {
   let promedioEdad = 0;
   let resultado = 0;
   for (i = 0; i < arrayEdad.length; i++) {
     resultado += +arrayEdad[i];
     promedioEdad = resultado / arrayEdad.length;
   }
-  const $mayorEdad = document.querySelector("#promedio");
-  $mayorEdad.innerText = `El promedio de edad es de ${promedioEdad} años.`;
+  return promedioEdad;
+}
 
-  return false;
+document.querySelector("#mayor-edad").onclick = function (event) {
+  let arrayEdad = [];
+  let edadInputs = document.querySelectorAll("#valores");
+  let textoResultado = document.querySelector("#resultado");
+  
+  for (let i = 0; i < edadInputs.length; i++) {
+    arrayEdad.push(Number(edadInputs[i].value));
+  }
+
+  let menorEdad = calcularMenorEdad(arrayEdad);
+  let mayorEdad = calcularMayorEdad(arrayEdad);
+  let promedioEdad = calcularPromedioEdad(arrayEdad)
+
+  textoResultado.innerText = `El integrante con mayor edad tiene ${mayorEdad} años. El integrante con menor edad tiene ${menorEdad} años. El promedio de edad es de ${promedioEdad} años.`
+
+  event.preventDefault()
 };
 
 document.querySelector("#reload").onclick = function () {

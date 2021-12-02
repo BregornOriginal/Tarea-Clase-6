@@ -1,5 +1,5 @@
 #titulo{
-    font-size: 32px;
+    font-size: 15px;
     color: royalblue;
     margin: 1;
 }
@@ -9,7 +9,7 @@
 }
 .label-clase{
     margin: 3;
-    color:red;
+    color:blue;
 
 }
 #integrantes{

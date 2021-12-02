@@ -21,22 +21,17 @@ const $formulariosGrupoFamiliar = document.querySelector(
   "#formularios-grupo-familiar"
 );
 
-contarGrupoFamiliar();
 
 const $labelcalcularMayorEdad = document.createElement("label");
 $labelcalcularMayorEdad.className = "label-clase";
 $labelcalcularMayorEdad.innerText = "Calcular";
 
-/*
-const $labelcalcularMenorEdad = document.createElement("label");
-$labelcalcularMenorEdad.className = "label-clase";
-$labelcalcularMenorEdad.innerText = "Menor de edad";
-
-const $labelcalcularPromedioEdad = document.createElement("label");
-$labelcalcularPromedioEdad.className = "label-clase";
-$labelcalcularPromedioEdad.innerText = "Promedio de edad";
-
-*/
+const $botonEnviar = document.createElement("button");
+$botonEnviar.setAttribute("id", "enviar-datos");
+$botonEnviar.setAttribute("type", SubmitEvent);
+$botonEnviar.className = "label-clase";
+$botonEnviar.innerText = "Enviar";
+$formulariosGrupoFamiliar.appendChild($botonEnviar);
 
 const $calcularMayorEdad = document.createElement("button");
 $calcularMayorEdad.appendChild($labelcalcularMayorEdad);
@@ -44,26 +39,10 @@ $calcularMayorEdad.setAttribute("id", "mayor-edad");
 $calcularMayorEdad.setAttribute("type", SubmitEvent);
 $formulariosGrupoFamiliar.appendChild($calcularMayorEdad);
 
-/*
-
-const $calcularMenorEdad = document.createElement("button");
-$calcularMenorEdad.appendChild($labelcalcularMenorEdad);
-$calcularMenorEdad.setAttribute("id", "menor-edad");
-$calcularMenorEdad.setAttribute("type", SubmitEvent);
-$formulariosGrupoFamiliar.appendChild($calcularMenorEdad);
-
-const $calcularPromedioEdad = document.createElement("button");
-$calcularPromedioEdad.appendChild($labelcalcularPromedioEdad);
-$calcularPromedioEdad.setAttribute("id", "promedio-edad");
-$calcularPromedioEdad.setAttribute("type", SubmitEvent);
-$formulariosGrupoFamiliar.appendChild($calcularPromedioEdad);
-
-*/
-
 const $recargarFormulario = document.createElement("button");
 $recargarFormulario.setAttribute("id", "reload");
 $recargarFormulario.className = "label-clase";
-$recargarFormulario.innerText = "Limpiar";
+$recargarFormulario.innerText = "Resetear";
 $formulariosGrupoFamiliar.appendChild($recargarFormulario);
 
 function crearInput($formulariosGrupoFamiliar, textoLabel) {
@@ -77,26 +56,26 @@ function crearInput($formulariosGrupoFamiliar, textoLabel) {
   $nuevoInput.setAttribute("placeholder", "Edad");
   $nuevoInput.className = "input-clase";
   $nuevoLabel.innerText = textoLabel;
-  $nuevoLabel.setAttribute("id", "integrantes");
-  $nuevoLabel.setAttribute("required", "_");
   $nuevoLabel.appendChild($nuevoInput);
   $nuevoLabel.appendChild($orderList);
   $formulariosGrupoFamiliar.appendChild($nuevoLabel);
 }
 
-function contarGrupoFamiliar() {
-  let cantidadDePersonas = Number(
-    prompt("De cuantas personas está compuesta su grupo familiar?")
-  );
+$botonEnviar.onclick = function() {
+  const $boxIntegrantes = document.querySelector("#cantidad-integrantes");
+  cantidadDePersonas = Number($boxIntegrantes.value);
   if (cantidadDePersonas > 0) {
   } else {
-    alert("Por favor ingrese un número > 0");
-    return contarGrupoFamiliar();
+    alert("Por favor ingrese un número mayor a 0");
+    return;
   }
   for (let i = 1; i <= cantidadDePersonas; i++) {
     crearInput($formulariosGrupoFamiliar, `Integrante ${i}`);
   }
-}
+  return false;
+};
+
+
 document.querySelector("#mayor-edad").onclick = function () {
   let arrayEdad = [];
   let edadInputs = document.querySelectorAll("#valores");
@@ -109,6 +88,7 @@ document.querySelector("#mayor-edad").onclick = function () {
       valorMaximo = arrayEdad[i];
     }
     const $mayorEdad = document.querySelector("#mayor");
+
     $mayorEdad.innerText = `El integrante con mayor edad tiene ${valorMaximo} años.`;
   }
 
@@ -137,6 +117,8 @@ document.querySelector("#mayor-edad").onclick = function () {
 document.querySelector("#reload").onclick = function () {
   location.reload();
 };
+
+///////////a continuación están las funciones para agregar los botones de cálculo por separado
 
 /*
 document.querySelector("#menor-edad").onclick = function () {

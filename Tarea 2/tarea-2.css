@@ -1,0 +1,28 @@
+body {
+  background-color: rosybrown;
+}
+.tittle{
+  font-family: 'Arial Narrow Bold';
+}
+#add-member{
+  background-color: #008000;
+  color: white;
+}
+#remove-member{
+background-color: white;
+color: red
+}
+#label-members-annual-salary{
+  color:black;
+  position: relative; top: 50px;
+}
+#button-calculate{
+  position: relative; top: 50px;
+}
+.hidden {
+    display: none;
+  }
+#result{
+  position: relative; top: 60px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

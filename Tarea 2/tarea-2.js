@@ -9,26 +9,109 @@ menor salario anual, salario anual promedio y salario mensual promedio.
 Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como 0).
 */
 
-const $cuerpoHtml = document.querySelector("body");
+const $bodyHtml = document.querySelector("body");
 const $form = document.querySelector("form");
 
-document.querySelector("#add-member").onclick = function () {
+const $newDiv = document.createElement("div");
+$newDiv.setAttribute("id", "container-annual-salary");
+$form.appendChild($newDiv);
+
+const $buttonCalculate = document.createElement("button");
+$buttonCalculate.innerText = "Calculate";
+$buttonCalculate.setAttribute("id", "button-calculate");
+$buttonCalculate.className = "hidden";
+const $labelButtonCalculate = document.createElement("label");
+
+$form.appendChild($buttonCalculate);
+
+document.querySelector("#add-member").onclick = function (event) {
+  $buttonCalculate.className = "view";
   const $newInput = document.createElement("input");
+  const $newLabel = document.createElement("label");
+  
+  $newLabel.setAttribute("id","label-members-annual-salary");
+  $newLabel.innerText= "Member annual salary";
+  $newLabel.appendChild($newInput);
+  $newDiv.appendChild($newLabel);
   $newInput.setAttribute("type", "number");
   $newInput.setAttribute("id", "members-annual-salary");
   $newInput.setAttribute("placeholder", "Annual salary");
-  $form.appendChild($newInput);
-  const $newLabel = document.createElement("label");
-  $newLabel.className = "label-class";
-  $newLabel.setAttribute("text", "annual salary");
-  $newInput.appendChild($newLabel);
+
+  event.preventDefault();
   return false;
 };
 
 const $buttonRemoveMember = document.getElementById("remove-member");
 
-$buttonRemoveMember.onclick = function () {
-  let $dad = document.getElementById("members-salary");
-  let $children = document.getElementById("members-annual-salary");
-  let deleteChildren = $dad.removeChild($children);
+$buttonRemoveMember.onclick = function (event) {
+  let $dad = document.getElementById("container-annual-salary");
+  let $children = document.getElementById("label-members-annual-salary");
+  $dad.removeChild($children);
+  event.preventDefault();
+};
+
+function calculateMaxSalary(arraySalary) {
+  let maxSalary = arraySalary[0];
+  for (i = 0; i < arraySalary.length; i++) {
+    if (arraySalary[i] > maxSalary) {
+      maxSalary = arraySalary[i];
+    }
+  }
+  return maxSalary;
+};
+
+function calculateMinSalary(arraySalary) {
+  let minSalary = arraySalary[0];
+  for (i = 0; i < arraySalary.length; i++) {
+    if (arraySalary[i] < minSalary) {
+      minSalary = arraySalary[i];
+    }
+  }
+  return minSalary;
+};
+
+function calculateAverageAnnualSalary(arraySalary) {
+  let averageAnnualSalary = 0;
+  let result = 0;
+  for (i = 0; i < arraySalary.length; i++) {
+    result += +arraySalary[i];
+    averageAnnualSalary = result / arraySalary.length;
+  }
+  return averageAnnualSalary;
+};
+
+function calculateAverageMensualSalary(averageAnnualSalary) {
+  const monthsInAYear = 12;
+  averageMensualSalary = averageAnnualSalary / monthsInAYear;
+  return averageMensualSalary;
+};
+
+document.querySelector("#button-calculate").onclick = function (event) {
+  let arraySalary = [];
+  let inputAnnualSalary = document.querySelectorAll("#members-annual-salary");
+
+  for (let i = 0; i < inputAnnualSalary.length; i++) {
+    if (inputAnnualSalary[i].value != 0 && inputAnnualSalary[i].value != "") {
+      arraySalary.push(Number(inputAnnualSalary[i].value));
+    }
+  }
+  console.log(arraySalary);
+
+  let maxSalary = calculateMaxSalary(arraySalary);
+  let minSalary = calculateMinSalary(arraySalary);
+  let averageAnnualSalary = calculateAverageAnnualSalary(arraySalary);
+  let averageMensualSalary = calculateAverageMensualSalary(averageAnnualSalary);
+
+  const $result = document.createElement("strong");
+  $result.setAttribute("id", "result");
+  $form.appendChild($result);
+
+  $result.innerText = `
+  The maximum salary is ${maxSalary} dollars. 
+  The minimum salary is ${minSalary} dollars. 
+  The average annual salary is ${averageAnnualSalary} dollars. 
+  The average mensual salary is ${averageMensualSalary} dollars.`;
+
+  event.preventDefault();
+  return false;
 };

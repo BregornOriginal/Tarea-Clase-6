@@ -28,14 +28,15 @@ document.querySelector("#add-member").onclick = function (event) {
   $buttonCalculate.className = "view";
   const $newInput = document.createElement("input");
   const $newLabel = document.createElement("label");
-  
-  $newLabel.setAttribute("id","label-members-annual-salary");
-  $newLabel.innerText= "Member annual salary";
+
+  $newLabel.setAttribute("id", "label-members-annual-salary");
+  $newLabel.innerText = "Member annual salary";
   $newLabel.appendChild($newInput);
   $newDiv.appendChild($newLabel);
   $newInput.setAttribute("type", "number");
   $newInput.setAttribute("id", "members-annual-salary");
   $newInput.setAttribute("placeholder", "Annual salary");
+  $newInput.value = 0;
 
   event.preventDefault();
   return false;
@@ -71,11 +72,19 @@ function calculateMinSalary(arraySalary) {
 };
 
 function calculateAverageAnnualSalary(arraySalary) {
+  let arraySalaryNoZero = [];
   let averageAnnualSalary = 0;
   let result = 0;
   for (i = 0; i < arraySalary.length; i++) {
-    result += +arraySalary[i];
-    averageAnnualSalary = result / arraySalary.length;
+    if (arraySalary[i] > 0) {
+      arraySalaryNoZero.push(arraySalary[i]);
+    }
+  }
+  for (let i = 0; i < arraySalaryNoZero.length; i++) {
+    result = arraySalaryNoZero[i] + result;
+  }
+  if (result > 0) {
+    averageAnnualSalary = result / arraySalaryNoZero.length;
   }
   return averageAnnualSalary;
 };
@@ -91,11 +100,10 @@ document.querySelector("#button-calculate").onclick = function (event) {
   let inputAnnualSalary = document.querySelectorAll("#members-annual-salary");
 
   for (let i = 0; i < inputAnnualSalary.length; i++) {
-    if (inputAnnualSalary[i].value != 0 && inputAnnualSalary[i].value != "") {
+    if (inputAnnualSalary[i].value != "") {
       arraySalary.push(Number(inputAnnualSalary[i].value));
     }
   }
-  console.log(arraySalary);
 
   let maxSalary = calculateMaxSalary(arraySalary);
   let minSalary = calculateMinSalary(arraySalary);

@@ -12,16 +12,15 @@ Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como
 const $bodyHtml = document.querySelector("body");
 const $form = document.querySelector("form");
 
-const $newDiv = document.createElement("div");
-$newDiv.setAttribute("id", "container-annual-salary");
-$form.appendChild($newDiv);
-
 const $buttonCalculate = document.createElement("button");
 $buttonCalculate.innerText = "Calculate";
 $buttonCalculate.setAttribute("id", "button-calculate");
 $buttonCalculate.className = "hidden";
 const $labelButtonCalculate = document.createElement("label");
 
+const $newDiv = document.createElement("div");
+$newDiv.setAttribute("id", "container-annual-salary");
+$form.appendChild($newDiv);
 $form.appendChild($buttonCalculate);
 
 document.querySelector("#add-member").onclick = function (event) {
@@ -99,6 +98,19 @@ document.querySelector("#button-calculate").onclick = function (event) {
   let arraySalary = [];
   let inputAnnualSalary = document.querySelectorAll("#members-annual-salary");
 
+  const $divStrong = document.createElement("div");
+  $divStrong.setAttribute("id", "container-strong");
+  const $divContenedorStrong = document.querySelectorAll("#container-strong");
+
+  const $resultStrong = document.createElement("strong");
+  $resultStrong.setAttribute("class", "result");
+  $divStrong.appendChild($resultStrong);
+  $form.appendChild($divStrong);
+
+  for (let i = 0; i < $divContenedorStrong.length; i++) {
+    $divContenedorStrong[i].remove();
+  }
+
   for (let i = 0; i < inputAnnualSalary.length; i++) {
     if (inputAnnualSalary[i].value != "") {
       arraySalary.push(Number(inputAnnualSalary[i].value));
@@ -110,11 +122,7 @@ document.querySelector("#button-calculate").onclick = function (event) {
   let averageAnnualSalary = calculateAverageAnnualSalary(arraySalary);
   let averageMensualSalary = calculateAverageMensualSalary(averageAnnualSalary);
 
-  const $result = document.createElement("strong");
-  $result.setAttribute("id", "result");
-  $form.appendChild($result);
-
-  $result.innerText = `
+  $resultStrong.innerText = `
   The maximum salary is ${maxSalary} dollars. 
   The minimum salary is ${minSalary} dollars. 
   The average annual salary is ${averageAnnualSalary} dollars. 
